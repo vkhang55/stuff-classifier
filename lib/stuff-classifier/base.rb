@@ -12,6 +12,7 @@ class StuffClassifier::Base
   
   attr_accessor :thresholds
   attr_accessor :min_prob
+  attr_accessor :ignore_words
 
 
   storable :version,:word_list,:category_list,:training_count,:thresholds,:min_prob
