@@ -135,10 +135,11 @@ class StuffClassifier::Base
   # classify a text
   def classify(text, default=nil)
     # Find the category with the highest probability
-    max_prob = @min_prob
+    scores = cat_scores(text)
+    minimum_score = scores.map { |score| score[1] }.min
+    max_prob = @min_prob > 0 ? @min_prob : (minimum_score + 0.01) # added this to eliminate returns false positive
     best = nil
 
-    scores = cat_scores(text)
     scores.each do |score|
       cat, prob = score
       if prob > max_prob
